@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Nirgunan Bot — Ask anything. Expect absolutely anything.">
+
+    <title>Nirgunan Bot | Ask the Unexpected</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+    <div class="background-name">
+        KRAAIZY
+    </div>
+
+
+    <div class="container">
+
+
+        <header class="header">
+
+            <div class="logo">
+                🤡 നിർഗുണൻ Bot
+            </div>
+
+
+            <div class="subtitle">
+                Ask Nirgunan, expect the unexpected...
+            </div>
+
+
+            <div class="mini-text">
+                The world's least useful AI
+            </div>
+
+        </header>
+
+
+
+        <main class="chat" id="chatBox">
+
+
+            <div class="message bot">
+
+                <div class="avatar">
+                    🤡
+                </div>
+
+
+                <div class="message-content">
+
+                    <div class="sender">
+                        Nirgunan
+                    </div>
+
+
+                    <div class="bubble">
+
+                        Hello, human.
+
+                        Ask me anything.
+
+                        I promise to make your question
+                        significantly less useful.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </main>
+
+
+
+        <div class="input-area">
+
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Ask something unnecessarily important..."
+                autocomplete="off"
+            >
+
+
+            <button id="askButton">
+                Ask 🤡
+            </button>
+
+        </div>
+
+
+
+        <div class="footer">
+
+            Powered by questionable intelligence • KRAAIZY
+
+        </div>
+
+
+    </div>
+
+
+
+<script>
+
+
+const input =
+    document.getElementById("messageInput");
+
+
+const button =
+    document.getElementById("askButton");
+
+
+const chatBox =
+    document.getElementById("chatBox");
+
+
+
+function addMessage(text, type) {
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        `message ${type}`;
+
+
+    const avatar =
+        document.createElement("div");
+
+    avatar.className =
+        "avatar";
+
+    avatar.textContent =
+        type === "bot" ? "🤡" : "🫵";
+
+
+
+    const content =
+        document.createElement("div");
+
+    content.className =
+        "message-content";
+
+
+
+    const sender =
+        document.createElement("div");
+
+    sender.className =
+        "sender";
+
+    sender.textContent =
+        type === "bot" ? "Nirgunan" : "You";
+
+
+
+    const bubble =
+        document.createElement("div");
+
+    bubble.className =
+        "bubble";
+
+    bubble.textContent =
+        text;
+
+
+
+    content.appendChild(sender);
+
+    content.appendChild(bubble);
+
+    message.appendChild(avatar);
+
+    message.appendChild(content);
+
+    chatBox.appendChild(message);
+
+
+    chatBox.scrollTop =
+        chatBox.scrollHeight;
+
+}
+
+
+
+async function askNirgunan() {
+
+    const message =
+        input.value.trim();
+
+
+    if (!message) {
+
+        addMessage(
+            "You typed absolutely nothing. Bold.",
+            "bot"
+        );
+
+        return;
+    }
+
+
+    addMessage(
+        message,
+        "user"
+    );
+
+
+    input.value = "";
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Thinking...";
+
+
+
+    const thinking =
+        document.createElement("div");
+
+    thinking.className =
+        "message bot";
+
+
+    thinking.innerHTML = `
+
+        <div class="avatar">
+            🤡
+        </div>
+
+        <div class="message-content">
+
+            <div class="sender">
+                Nirgunan
+            </div>
+
+            <div class="bubble typing">
+                Nirgunan is thinking unnecessarily...
+            </div>
+
+        </div>
+
+    `;
+
+
+    chatBox.appendChild(thinking);
+
+    chatBox.scrollTop =
+        chatBox.scrollHeight;
+
+
+
+    try {
+
+        const response =
+            await fetch("/ask", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify({
+                        message: message
+                    })
+
+            });
+
+
+
+        if (!response.ok) {
+            throw new Error("Server error");
+        }
+
+
+        const data =
+            await response.json();
+
+
+        thinking.remove();
+
+
+        addMessage(
+            data.reply,
+            "bot"
+        );
+
+
+    }
+
+    catch (error) {
+
+        thinking.remove();
+
+
+        const errors = [
+
+            "Congratulations. You confused Nirgunan. That's genuinely impressive. 🤡",
+
+            "My brain has temporarily resigned. Please try again.",
+
+            "Something went wrong. I would investigate, but that sounds exhausting.",
+
+            "Error 404: Intelligence not found.",
+
+            "I tried my best. My best has filed a complaint.",
+
+            "The connection disappeared faster than my motivation to be useful."
+
+        ];
+
+
+        const randomError =
+            errors[
+                Math.floor(
+                    Math.random() *
+                    errors.length
+                )
+            ];
+
+
+        addMessage(
+            randomError,
+            "bot"
+        );
+
+    }
+
+
+
+    button.disabled = false;
+
+    button.textContent =
+        "Ask 🤡";
+
+    input.focus();
+
+}
+
+
+
+button.addEventListener(
+    "click",
+    askNirgunan
+);
+
+
+
+input.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Enter") {
+
+            askNirgunan();
+
+        }
+
+    }
+);
+
+
+
+input.focus();
+
+
+</script>
+
+
+</body>
+
+</html>
