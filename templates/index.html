@@ -8,10 +8,17 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-          content="Nirgunan Bot — Ask anything. Expect absolutely anything.">
+    <title>Nirgunan</title>
 
-    <title>Nirgunan Bot | Ask the Unexpected</title>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap"
+          rel="stylesheet">
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
@@ -21,371 +28,205 @@
 
 <body>
 
-    <div class="background-name">
-        KRAAIZY
+
+<!-- =====================================================
+     WELCOME
+===================================================== -->
+
+<section id="welcome-screen"
+         class="welcome-screen">
+
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+
+    <div class="grain"></div>
+
+    <div class="welcome-content">
+
+        <div class="gold-line"></div>
+
+        <h1>
+            Entha Mone,
+            <span>Nirgunan here.</span>
+        </h1>
+
+        <p>
+            The most useless AI to ever exist.
+        </p>
+
+        <button id="meet-button"
+                class="meet-button">
+
+            <span>MEET NIRGUNAN</span>
+
+            <span class="arrow">
+                →
+            </span>
+
+        </button>
+
     </div>
 
+</section>
 
-    <div class="container">
 
 
-        <header class="header">
+<!-- =====================================================
+     CHAT
+===================================================== -->
+
+<section id="chat-screen"
+         class="chat-screen hidden">
+
+
+    <header class="header">
+
+        <div>
 
             <div class="logo">
-                🤡 നിർഗുണൻ Bot
+                NIRGUNAN
             </div>
-
 
             <div class="subtitle">
-                Ask Nirgunan, expect the unexpected...
+                Ask Nirgunan.
             </div>
-
-
-            <div class="mini-text">
-                The world's least useful AI
-            </div>
-
-        </header>
-
-
-
-        <main class="chat" id="chatBox">
-
-
-            <div class="message bot">
-
-                <div class="avatar">
-                    🤡
-                </div>
-
-
-                <div class="message-content">
-
-                    <div class="sender">
-                        Nirgunan
-                    </div>
-
-
-                    <div class="bubble">
-
-                        Hello, human.
-
-                        Ask me anything.
-
-                        I promise to make your question
-                        significantly less useful.
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-        </main>
-
-
-
-        <div class="input-area">
-
-            <input
-                type="text"
-                id="messageInput"
-                placeholder="Ask something unnecessarily important..."
-                autocomplete="off"
-            >
-
-
-            <button id="askButton">
-                Ask 🤡
-            </button>
 
         </div>
 
 
+        <div class="online">
 
-        <div class="footer">
+            <span></span>
 
-            Powered by questionable intelligence • KRAAIZY
+            ONLINE
 
         </div>
 
+    </header>
+
+
+
+    <main id="chat-messages"
+          class="chat-messages">
+
+        <div class="message nirgunan">
+
+            <div class="label">
+                NIRGUNAN
+            </div>
+
+            <div class="text">
+
+                Ah. You finally arrived.
+                Ask something. I probably won't help.
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <div class="controls">
+
+        <button id="random-button">
+            RANDOM QUESTION
+        </button>
+
+        <button id="mode-button">
+            MODE
+        </button>
+
+        <button id="clear-button">
+            CLEAR
+        </button>
 
     </div>
 
 
 
-<script>
+    <div id="mode-panel"
+         class="mode-panel hidden">
 
-
-const input =
-    document.getElementById("messageInput");
-
-
-const button =
-    document.getElementById("askButton");
-
-
-const chatBox =
-    document.getElementById("chatBox");
-
-
-
-function addMessage(text, type) {
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        `message ${type}`;
-
-
-    const avatar =
-        document.createElement("div");
-
-    avatar.className =
-        "avatar";
-
-    avatar.textContent =
-        type === "bot" ? "🤡" : "🫵";
-
-
-
-    const content =
-        document.createElement("div");
-
-    content.className =
-        "message-content";
-
-
-
-    const sender =
-        document.createElement("div");
-
-    sender.className =
-        "sender";
-
-    sender.textContent =
-        type === "bot" ? "Nirgunan" : "You";
-
-
-
-    const bubble =
-        document.createElement("div");
-
-    bubble.className =
-        "bubble";
-
-    bubble.textContent =
-        text;
-
-
-
-    content.appendChild(sender);
-
-    content.appendChild(bubble);
-
-    message.appendChild(avatar);
-
-    message.appendChild(content);
-
-    chatBox.appendChild(message);
-
-
-    chatBox.scrollTop =
-        chatBox.scrollHeight;
-
-}
-
-
-
-async function askNirgunan() {
-
-    const message =
-        input.value.trim();
-
-
-    if (!message) {
-
-        addMessage(
-            "You typed absolutely nothing. Bold.",
-            "bot"
-        );
-
-        return;
-    }
-
-
-    addMessage(
-        message,
-        "user"
-    );
-
-
-    input.value = "";
-
-
-    button.disabled = true;
-
-    button.textContent =
-        "Thinking...";
-
-
-
-    const thinking =
-        document.createElement("div");
-
-    thinking.className =
-        "message bot";
-
-
-    thinking.innerHTML = `
-
-        <div class="avatar">
-            🤡
+        <div class="mode-heading">
+            SELECT MODE
         </div>
 
-        <div class="message-content">
+        <button class="mode-option active"
+                data-mode="USELESS">
 
-            <div class="sender">
-                Nirgunan
-            </div>
+            USELESS
 
-            <div class="bubble typing">
-                Nirgunan is thinking unnecessarily...
-            </div>
+        </button>
 
-        </div>
+        <button class="mode-option"
+                data-mode="SARCASTIC">
 
-    `;
+            SARCASTIC
 
+        </button>
 
-    chatBox.appendChild(thinking);
+        <button class="mode-option"
+                data-mode="PHILOSOPHICAL">
 
-    chatBox.scrollTop =
-        chatBox.scrollHeight;
+            PHILOSOPHICAL
 
+        </button>
 
+        <button class="mode-option"
+                data-mode="RANDOM">
 
-    try {
+            RANDOM
 
-        const response =
-            await fetch("/ask", {
+        </button>
 
-                method: "POST",
+        <button class="mode-option"
+                data-mode="OVERCONFIDENT">
 
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
+            OVERCONFIDENT
 
-                body:
-                    JSON.stringify({
-                        message: message
-                    })
+        </button>
 
-            });
+    </div>
 
 
 
-        if (!response.ok) {
-            throw new Error("Server error");
-        }
+    <form id="chat-form"
+          class="input-container">
 
+        <input
+            id="user-input"
+            type="text"
+            placeholder="Ask Nirgunan something..."
+            autocomplete="off"
+        >
 
-        const data =
-            await response.json();
+        <button id="send-button"
+                type="submit">
 
+            →
 
-        thinking.remove();
+        </button>
 
-
-        addMessage(
-            data.reply,
-            "bot"
-        );
-
-
-    }
-
-    catch (error) {
-
-        thinking.remove();
-
-
-        const errors = [
-
-            "Congratulations. You confused Nirgunan. That's genuinely impressive. 🤡",
-
-            "My brain has temporarily resigned. Please try again.",
-
-            "Something went wrong. I would investigate, but that sounds exhausting.",
-
-            "Error 404: Intelligence not found.",
-
-            "I tried my best. My best has filed a complaint.",
-
-            "The connection disappeared faster than my motivation to be useful."
-
-        ];
-
-
-        const randomError =
-            errors[
-                Math.floor(
-                    Math.random() *
-                    errors.length
-                )
-            ];
-
-
-        addMessage(
-            randomError,
-            "bot"
-        );
-
-    }
+    </form>
 
 
 
-    button.disabled = false;
+    <div class="footer">
 
-    button.textContent =
-        "Ask 🤡";
+        Nirgunan accepts questions.
+        Whether it accepts logic is another matter.
 
-    input.focus();
-
-}
+    </div>
 
 
-
-button.addEventListener(
-    "click",
-    askNirgunan
-);
+</section>
 
 
 
-input.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (event.key === "Enter") {
-
-            askNirgunan();
-
-        }
-
-    }
-);
-
-
-
-input.focus();
-
-
+<script src="{{ url_for('static', filename='script.js') }}">
 </script>
-
 
 </body>
 

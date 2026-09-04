@@ -2,99 +2,135 @@
 
 
 
-# [Project Name] 🎯
+# Nirgunan Bot
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: Not specified in the codebase
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team members and colleges: Not specified in the codebase
 
 ### Project Description
-[2-3 lines about what your project does]
+Nirgunan Bot is a deliberately useless AI chat application. Users submit questions through a browser interface and receive short, absurd, sarcastic, confidently incorrect responses.
+
+The Flask backend sends each question to a locally running Ollama `llama3.2` model and returns the cleaned response to the chat interface.
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+The project solves the entirely fictional problem of people receiving useful, accurate, and sensible answers from chatbots.
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+Nirgunan is instructed to avoid correct answers, useful advice, explanations, tutorials, and real calculations. It produces entertaining nonsense instead, limited to one or two sentences and 25 words.
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+- Python
+- Flask
+- Requests
+- HTML, CSS, and vanilla JavaScript
+- Ollama with the `llama3.2` model
+- Gunicorn
 
 For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+- No hardware components are used.
 
 ### Implementation
 For Software:
 # Installation
-[commands]
+
+Prerequisites:
+
+- Python 3
+- Ollama installed and running
+- The Ollama `llama3.2` model
+
+Download the model:
+
+```bash
+ollama pull llama3.2
+```
+
+Install the Python dependencies:
+
+```bash
+python -m venv .venv
+```
+
+Windows PowerShell:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+macOS/Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+```bash
+pip install -r requirements.txt
+```
 
 # Run
-[commands]
+
+Start Ollama, then run the Flask application:
+
+```bash
+python app.py
+```
+
+Open `http://127.0.0.1:5000` in a browser. The application listens on port 5000 and binds to `0.0.0.0`.
+
+For a WSGI server, the repository also includes Gunicorn:
+
+```bash
+gunicorn app:app
+```
 
 ### Project Documentation
 For Software:
 
-# Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+# Screenshots
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
-
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+Screenshots are not included in the repository.
 
 # Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
+
+```text
+Browser -> Flask GET / -> templates/index.html
+Browser -> Flask POST /ask -> Ollama http://localhost:11434/api/generate
+Browser <- JSON reply <- Flask <- Ollama
+```
+
+The browser submits JSON containing `message`; Flask sends the prompt to Ollama and returns JSON containing `reply`.
 
 For Hardware:
 
 # Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
 
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
+Not applicable. This is a software-only project.
 
 # Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
 
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
+Not applicable. No physical build is used.
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+
+No demo video is included in the repository.
 
 # Additional Demos
-[Add any extra demo materials/links]
+
+No additional demo materials are included in the repository.
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- Team contributions are not specified in the codebase.
 
 ---
-Made with ❤️ at TinkerHub Useless Projects 
+Made with love at TinkerHub Useless Projects
 
 ![Static Badge](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)
 ![Static Badge](https://img.shields.io/badge/UselessProjects--26-26?link=https%3A%2F%2Ftinkerhub.org%2Fevents%2F1M8ORET9A1%2Fuseless-projects-3.0)
