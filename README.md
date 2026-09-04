@@ -2,90 +2,73 @@
 
 
 
-# Nirgunan Bot
+# Nirgunan 🎯
 
 
 ## Basic Details
-### Team Name: Not specified in the codebase
+### Team Name: krishhhhhnah
 
 
 ### Team Members
-- Team members and colleges: Not specified in the codebase
+- Team Lead: Krishna (krishhhhhnah) - Muthoot Institute of Technology and Science (MGITS)
+- Member 2: N/A (Solo project)
+- Member 3: N/A (Solo project)
 
 ### Project Description
-Nirgunan Bot is a deliberately useless AI chat application. Users submit questions through a browser interface and receive short, absurd, sarcastic, confidently incorrect responses.
-
-The Flask backend sends each question to a locally running Ollama `llama3.2` model and returns the cleaned response to the chat interface.
+Nirgunan is a satirical, delightfully useless web AI chat assistant built with Flask, vanilla JavaScript, and Ollama running the `llama3.2` model. Styled with a dark luxury aesthetic ("Entha Mone, Nirgunan here"), it is intentionally engineered to avoid helpful answers and instead delivers short, sarcastic, philosophical, overconfident, and absurd responses across multiple interactive personality modes.
 
 ### The Problem (that doesn't exist)
-The project solves the entirely fictional problem of people receiving useful, accurate, and sensible answers from chatbots.
+Modern AI assistants have become dangerously helpful, productive, and logical, leaving humans exhausted by useful answers, sound advice, and practical solutions. The world suffered from a tragic lack of an AI dedicated entirely to unhelpfulness, overcomplicating simple queries, and wasting computing cycles with dramatic flair.
 
 ### The Solution (that nobody asked for)
-Nirgunan is instructed to avoid correct answers, useful advice, explanations, tutorials, and real calculations. It produces entertaining nonsense instead, limited to one or two sentences and 25 words.
+Nirgunan solves this by running a local LLaMA 3.2 model instructed by a custom personality prompt to be useless, sarcastic, random, dramatic, slightly philosophical, and overconfident for no reason. Through a clean single-page web app, users can submit questions, trigger curated existential prompts (e.g., "Can a potato become an engineer?"), and switch between 5 distinct modes (USELESS, SARCASTIC, PHILOSOPHICAL, RANDOM, OVERCONFIDENT) to guarantee entertaining, useless answers.
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- Python
-- Flask
-- Requests
-- HTML, CSS, and vanilla JavaScript
-- Ollama with the `llama3.2` model
-- Gunicorn
+- Languages used: Python 3, JavaScript (Vanilla ES6+), HTML5, CSS3
+- Frameworks used: Flask 3.x
+- Libraries used: `requests` (for local Ollama HTTP REST API calls), `gunicorn` (WSGI server)
+- Tools used: Ollama (local LLM runtime running `llama3.2`), Google Fonts (`Cormorant Garamond`, `DM Sans`)
 
 For Hardware:
-- No hardware components are used.
+- List main components: None (Software-only project)
+- List specifications: Standard PC or laptop capable of running Python 3 and Ollama (`llama3.2` 3.2B parameter model)
+- List tools required: None
 
 ### Implementation
 For Software:
 # Installation
-
-Prerequisites:
-
-- Python 3
-- Ollama installed and running
-- The Ollama `llama3.2` model
-
-Download the model:
-
 ```bash
+# 1. Clone the repository
+git clone https://github.com/krishhhhhnah/Nirgunan_bot.git
+cd Nirgunan_bot
+
+# 2. Pull the llama3.2 model in Ollama
 ollama pull llama3.2
-```
 
-Install the Python dependencies:
+# 3. Set up and activate a Python virtual environment
+python -m venv venv
+# On Windows (PowerShell):
+.\venv\Scripts\Activate.ps1
+# On Linux/macOS:
+source venv/bin/activate
 
-```bash
-python -m venv .venv
-```
-
-Windows PowerShell:
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-macOS/Linux:
-
-```bash
-source .venv/bin/activate
-```
-
-```bash
+# 4. Install dependencies
 pip install -r requirements.txt
 ```
 
 # Run
-
-Start Ollama, then run the Flask application:
-
 ```bash
+# 1. Ensure Ollama is running in the background (default port 11434)
+ollama serve
+
+# 2. Start the Flask application
 python app.py
 ```
+Open your browser and navigate to `http://127.0.0.1:5000`.
 
-Open `http://127.0.0.1:5000` in a browser. The application listens on port 5000 and binds to `0.0.0.0`.
-
-For a WSGI server, the repository also includes Gunicorn:
-
+Alternatively, run with Gunicorn:
 ```bash
 gunicorn app:app
 ```
@@ -93,47 +76,80 @@ gunicorn app:app
 ### Project Documentation
 For Software:
 
-# Screenshots
+# Screenshots (Add at least 3)
+![alt text](<Screenshot 2026-09-04 094950.png>)
+*Welcome Screen: Initial greeting introducing Nirgunan ("Entha Mone, Nirgunan here - The most useless AI to ever exist") with ambient glow and "MEET NIRGUNAN" transition button.*
 
-Screenshots are not included in the repository.
+
+![Screenshot2](Add screenshot 2 here with proper name)
+*Chat Screen: Interactive chat UI showing active conversation flow with Nirgunan, typing indicator, and sarcastic responses.*
+
+![Screenshot3](Add screenshot 3 here with proper name)
+*Mode Panel & Controls: The control panel showing the 5 selectable modes (USELESS, SARCASTIC, PHILOSOPHICAL, RANDOM, OVERCONFIDENT) alongside the Random Question and Clear buttons.*
 
 # Diagrams
+![Workflow](Add your workflow/architecture diagram here)
+*Workflow Diagram: The user visits the web app hosted by Flask (`app.py`), which serves the single-page frontend (`templates/index.html`, `static/style.css`, `static/script.js`). When a question is submitted, the frontend sends a `POST /chat` request with the user message and active mode. Flask injects the Nirgunan personality system prompt and proxies the request to Ollama's local endpoint (`http://localhost:11434/api/generate`) running `llama3.2`. The generated response is returned as JSON and rendered in the chat window.*
 
-```text
-Browser -> Flask GET / -> templates/index.html
-Browser -> Flask POST /ask -> Ollama http://localhost:11434/api/generate
-Browser <- JSON reply <- Flask <- Ollama
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User
+    participant Browser as Web Browser (HTML/CSS/JS)
+    participant Flask as Flask Server (app.py)
+    participant Ollama as Ollama Daemon (llama3.2)
+
+    User->>Browser: Navigate to http://127.0.0.1:5000
+    Browser->>Flask: GET /
+    Flask-->>Browser: 200 OK (renders templates/index.html)
+    User->>Browser: Clicks "MEET NIRGUNAN"
+    Browser-->>User: Reveals Chat Interface
+    User->>Browser: Enters question or clicks "RANDOM QUESTION"
+    User->>Browser: Selects mode (USELESS, SARCASTIC, etc.)
+    Browser->>Flask: POST /chat {"message": "...", "mode": "USELESS"}
+    Flask->>Flask: Constructs Nirgunan persona system prompt
+    Flask->>Ollama: POST http://localhost:11434/api/generate
+    Note over Ollama: Generates absurd/useless response with llama3.2
+    Ollama-->>Flask: JSON {"response": "..."}
+    Flask-->>Browser: JSON {"response": "..."}
+    Browser-->>User: Displays message bubble with Nirgunan's witty reply
 ```
-
-The browser submits JSON containing `message`; Flask sends the prompt to Ollama and returns JSON containing `reply`.
 
 For Hardware:
 
 # Schematic & Circuit
+![Circuit](Add your circuit diagram here)
+*Not applicable: Nirgunan is a software-only project with no electronic circuits or physical wiring.*
 
-Not applicable. This is a software-only project.
+![Schematic](Add your schematic diagram here)
+*Not applicable: Software-only project (no hardware schematic).*
 
 # Build Photos
+![Components](Add photo of your components here)
+*Not applicable: No physical hardware components required.*
 
-Not applicable. No physical build is used.
+![Build](Add photos of build process here)
+*Not applicable: Software-only implementation.*
+
+![Final](Add photo of final product here)
+*Not applicable: Web application with no physical hardware enclosure.*
 
 ### Project Demo
 # Video
-
-No demo video is included in the repository.
+[Add your demo video link here]
+*Demonstration video of running Nirgunan locally: navigating the welcome screen, changing personality modes, triggering random existential questions, and receiving useless responses from Ollama.*
 
 # Additional Demos
-
-No additional demo materials are included in the repository.
+[Add any extra demo materials/links]
+*Local live demo available by running `python app.py` and accessing `http://127.0.0.1:5000`.*
 
 ## Team Contributions
-- Team contributions are not specified in the codebase.
+- krishhhhhnah: Architected and built the full application: developed the Flask web server and local Ollama API integration (`app.py`), crafted Nirgunan's system prompts and personality mode logic, designed the luxury dark UI (`templates/index.html`, `static/style.css`), and implemented frontend chat interactivity, animations, and random prompt generators (`static/script.js`).
+- Member 2: N/A (Solo project)
+- Member 3: N/A (Solo project)
 
 ---
-Made with love at TinkerHub Useless Projects
+Made with ❤️ at TinkerHub Useless Projects 
 
 ![Static Badge](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)
 ![Static Badge](https://img.shields.io/badge/UselessProjects--26-26?link=https%3A%2F%2Ftinkerhub.org%2Fevents%2F1M8ORET9A1%2Fuseless-projects-3.0)
-
-
-
