@@ -21,7 +21,7 @@
           rel="stylesheet">
 
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+          href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
 
@@ -54,16 +54,31 @@
             The most useless AI to ever exist.
         </p>
 
-        <button id="meet-button"
-                class="meet-button">
+        <div class="welcome-buttons">
 
-            <span>MEET NIRGUNAN</span>
+            <button id="meet-button"
+                    class="meet-button">
 
-            <span class="arrow">
-                →
-            </span>
+                <span>MEET NIRGUNAN</span>
 
-        </button>
+                <span class="arrow">
+                    →
+                </span>
+
+            </button>
+
+            <button id="welcome-demo-button"
+                    class="demo-outline-button">
+
+                <span>WATCH DEMO</span>
+
+                <span class="play-icon">
+                    ▶
+                </span>
+
+            </button>
+
+        </div>
 
     </div>
 
@@ -136,6 +151,14 @@
 
         <button id="mode-button">
             MODE
+        </button>
+
+        <button id="demo-button">
+            WATCH DEMO
+        </button>
+
+        <button id="workflow-button">
+            WORKFLOW
         </button>
 
         <button id="clear-button">
@@ -225,7 +248,85 @@
 
 
 
-<script src="{{ url_for('static', filename='script.js') }}">
+<!-- =====================================================
+     ASSET MODALS (DEMO & WORKFLOW)
+===================================================== -->
+
+<div id="demo-modal"
+     class="asset-modal hidden">
+
+    <div class="asset-modal-overlay"></div>
+
+    <div class="asset-modal-container">
+
+        <div class="asset-modal-header">
+
+            <div class="asset-modal-title">
+                NIRGUNAN IN ACTION
+            </div>
+
+            <button class="asset-modal-close"
+                    id="close-demo">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="asset-modal-body">
+
+            <video id="demo-video-player"
+                   controls
+                   preload="metadata">
+
+                <source src="{{ url_for('static', filename='videos/nirgunan_demo.mp4') }}"
+                        type="video/mp4">
+
+                Your browser does not support the video tag.
+
+            </video>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="workflow-modal"
+     class="asset-modal hidden">
+
+    <div class="asset-modal-overlay"></div>
+
+    <div class="asset-modal-container">
+
+        <div class="asset-modal-header">
+
+            <div class="asset-modal-title">
+                NIRGUNAN ARCHITECTURE & WORKFLOW
+            </div>
+
+            <button class="asset-modal-close"
+                    id="close-workflow">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="asset-modal-body">
+
+            <img src="{{ url_for('static', filename='images/workflow_diagram.jpeg') }}"
+                 alt="Nirgunan Workflow Diagram"
+                 class="workflow-img">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script src="{{ url_for('static', filename='js/script.js') }}">
 </script>
 
 </body>

@@ -422,3 +422,68 @@ function escapeHTML(text) {
     return element.innerHTML;
 
 }
+
+
+/* =====================================================
+   DEMO & WORKFLOW MODALS
+===================================================== */
+
+const demoModal = document.getElementById("demo-modal");
+const workflowModal = document.getElementById("workflow-modal");
+const welcomeDemoBtn = document.getElementById("welcome-demo-button");
+const chatDemoBtn = document.getElementById("demo-button");
+const chatWorkflowBtn = document.getElementById("workflow-button");
+const closeDemoBtn = document.getElementById("close-demo");
+const closeWorkflowBtn = document.getElementById("close-workflow");
+const demoVideoPlayer = document.getElementById("demo-video-player");
+
+function openModal(modal) {
+    if (modal) {
+        modal.classList.remove("hidden");
+    }
+}
+
+function closeModal(modal) {
+    if (modal) {
+        modal.classList.add("hidden");
+        if (demoVideoPlayer) {
+            demoVideoPlayer.pause();
+        }
+    }
+}
+
+if (welcomeDemoBtn) {
+    welcomeDemoBtn.addEventListener("click", () => openModal(demoModal));
+}
+
+if (chatDemoBtn) {
+    chatDemoBtn.addEventListener("click", () => openModal(demoModal));
+}
+
+if (chatWorkflowBtn) {
+    chatWorkflowBtn.addEventListener("click", () => openModal(workflowModal));
+}
+
+if (closeDemoBtn) {
+    closeDemoBtn.addEventListener("click", () => closeModal(demoModal));
+}
+
+if (closeWorkflowBtn) {
+    closeWorkflowBtn.addEventListener("click", () => closeModal(workflowModal));
+}
+
+[demoModal, workflowModal].forEach(modal => {
+    if (modal) {
+        const overlay = modal.querySelector(".asset-modal-overlay");
+        if (overlay) {
+            overlay.addEventListener("click", () => closeModal(modal));
+        }
+    }
+});
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        closeModal(demoModal);
+        closeModal(workflowModal);
+    }
+});

@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 import requests
+import os
 
 app = Flask(__name__)
 
@@ -9,10 +10,16 @@ def home():
     return render_template("index.html")
 
 
+@app.route("/assets/<path:filename>")
+def serve_assets(filename):
+    assets_dir = os.path.join(app.root_path, "assets")
+    return send_from_directory(assets_dir, filename)
+
+
 @app.route("/chat", methods=["POST"])
 def chat():
 
-    data = request.get_json()
+    data = request.get_json() or {}
 
     user_message = data.get("message", "")
     mode = data.get("mode", "USELESS")

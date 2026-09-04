@@ -268,12 +268,27 @@ body {
 
 
 /* =====================================================
-   BUTTON
+   BUTTONS
 ===================================================== */
 
-.meet-button {
+.welcome-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 16px;
+
+    flex-wrap: wrap;
 
     margin-top: 48px;
+
+}
+
+
+.meet-button {
 
     padding: 17px 27px;
 
@@ -340,6 +355,63 @@ body {
 .meet-button:hover .arrow {
 
     transform: translateX(6px);
+
+}
+
+
+.demo-outline-button {
+
+    padding: 17px 27px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    background: rgba(14, 13, 11, 0.5);
+
+    border: 1px solid rgba(197, 164, 103, 0.25);
+
+    color: var(--cream-soft);
+
+    font-family: var(--sans);
+
+    font-size: .68rem;
+
+    letter-spacing: .2em;
+
+    cursor: pointer;
+
+    transition: .4s ease;
+
+}
+
+
+.demo-outline-button:hover {
+
+    border-color: var(--gold-light);
+
+    color: var(--cream);
+
+    background: rgba(197, 164, 103, 0.08);
+
+    transform: translateY(-4px);
+
+    box-shadow:
+
+        0 15px 50px rgba(0,0,0,.5),
+
+        0 0 30px rgba(120, 50, 200, 0.15);
+
+}
+
+
+.demo-outline-button .play-icon {
+
+    color: var(--gold);
+
+    font-size: 0.85rem;
 
 }
 
@@ -788,6 +860,183 @@ body {
     font-size: .52rem;
 
     letter-spacing: .08em;
+
+}
+
+
+/* =====================================================
+   ASSET MODALS (DEMO & WORKFLOW)
+===================================================== */
+
+.asset-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    opacity: 1;
+
+    transition: opacity 0.3s ease;
+
+}
+
+.asset-modal.hidden {
+
+    display: none !important;
+
+}
+
+.asset-modal-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(7, 7, 6, 0.88);
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
+
+}
+
+.asset-modal-container {
+
+    position: relative;
+
+    z-index: 2;
+
+    background: #0d0c0a;
+
+    border: 1px solid var(--border);
+
+    box-shadow: 0 25px 80px rgba(0,0,0,0.85), 0 0 50px rgba(197, 164, 103, 0.08);
+
+    max-width: 900px;
+
+    width: 100%;
+
+    max-height: 90vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+}
+
+.asset-modal-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 16px 22px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    background: #11100e;
+
+}
+
+.asset-modal-title {
+
+    font-family: var(--serif);
+
+    font-size: 1.2rem;
+
+    letter-spacing: 0.18em;
+
+    color: var(--gold-light);
+
+}
+
+.asset-modal-close {
+
+    background: transparent;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    color: var(--cream-soft);
+
+    width: 32px;
+
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 1rem;
+
+    transition: 0.3s ease;
+
+}
+
+.asset-modal-close:hover {
+
+    color: var(--gold-light);
+
+    border-color: var(--border);
+
+}
+
+.asset-modal-body {
+
+    padding: 20px;
+
+    overflow-y: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #070706;
+
+}
+
+.asset-modal-body video {
+
+    width: 100%;
+
+    max-height: 70vh;
+
+    outline: none;
+
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    background: #000;
+
+}
+
+.asset-modal-body .workflow-img {
+
+    max-width: 100%;
+
+    max-height: 72vh;
+
+    object-fit: contain;
+
+    border: 1px solid rgba(197, 164, 103, 0.2);
 
 }
 
